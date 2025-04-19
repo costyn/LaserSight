@@ -8,6 +8,7 @@ import {
     getRecommendedScanRate,
     MAX_ANGLE
 } from '../types';
+import { ThemeToggle } from './ThemeToggle.tsx';
 
 import { MinusButton, PlusButton } from './NumberAdjustButton';
 
@@ -84,6 +85,10 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
 
     return (
         <div className="p-6 max-w-lg mx-auto bg-white rounded-xl shadow-md">
+            <div className="relative top-4 right-4">
+                <ThemeToggle />
+            </div>
+
             <h1 className="text-2xl font-bold text-center mb-6 text-blue-600">LaserSight Calculator</h1>
 
             <div className="mb-4">
