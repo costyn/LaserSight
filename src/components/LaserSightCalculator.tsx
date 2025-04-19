@@ -8,6 +8,9 @@ import {
     getRecommendedScanRate
 } from '../types';
 
+import { MinusButton, PlusButton } from './NumberAdjustButton';
+
+
 interface LaserSightCalculatorProps {
     scannerDatabase: ScannerDatabase;
 }
@@ -112,39 +115,63 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
             {calculationMode !== CalculationMode.Angle && (
                 <div className="mb-4">
                     <label className="block text-sm font-medium mb-2">Scan Angle (degrees):</label>
-                    <input
-                        type="number"
-                        value={angle || ""}
-                        onChange={handleInputChange(setAngle)}
-                        className="w-full p-2 border rounded"
-                        placeholder="Enter scan angle"
-                    />
+                    <div className="flex items-center space-x-4">
+
+                        <input
+                            type="number"
+                            value={angle !== null
+                                ? Math.round(angle) : ""}
+                            onChange={handleInputChange(setAngle)}
+                            className="w-full p-2 border rounded"
+                            placeholder="Enter scan angle"
+                        />
+                        <MinusButton
+                            onClick={() => setAngle(prev => Math.max((prev || 0) - 1, 0))}
+                            disabled={!angle || angle <= 0}
+                        />
+                        <PlusButton onClick={() => setAngle(prev => (prev || 0) + 1)} />
+                    </div>
                 </div>
+
             )}
 
             {calculationMode !== CalculationMode.Distance && (
                 <div className="mb-4">
                     <label className="block text-sm font-medium mb-2">Distance (meters or feet):</label>
-                    <input
-                        type="number"
-                        value={distance || ""}
-                        onChange={handleInputChange(setDistance)}
-                        className="w-full p-2 border rounded"
-                        placeholder="Enter distance"
-                    />
+                    <div className="flex items-center space-x-4">
+                        <input
+                            type="number"
+                            value={distance || ""}
+                            onChange={handleInputChange(setDistance)}
+                            className="w-full p-2 border rounded"
+                            placeholder="Enter distance"
+                        />
+                        <MinusButton
+                            onClick={() => setDistance(prev => Math.max((prev || 0) - 1, 0))}
+                            disabled={!angle || angle <= 0}
+                        />
+                        <PlusButton onClick={() => setDistance(prev => (prev || 0) + 1)} />
+                    </div>
                 </div>
             )}
 
             {calculationMode !== CalculationMode.Width && (
                 <div className="mb-4">
                     <label className="block text-sm font-medium mb-2">Projection Width (meters or feet):</label>
-                    <input
-                        type="number"
-                        value={width || ""}
-                        onChange={handleInputChange(setWidth)}
-                        className="w-full p-2 border rounded"
-                        placeholder="Enter projection width"
-                    />
+                    <div className="flex items-center space-x-4">
+                        <input
+                            type="number"
+                            value={width || ""}
+                            onChange={handleInputChange(setWidth)}
+                            className="w-full p-2 border rounded"
+                            placeholder="Enter projection width"
+                        />
+                        <MinusButton
+                            onClick={() => setWidth(prev => Math.max((prev || 0) - 1, 0))}
+                            disabled={!angle || angle <= 0}
+                        />
+                        <PlusButton onClick={() => setWidth(prev => (prev || 0) + 1)} />
+                    </div>
                 </div>
             )}
 
@@ -152,20 +179,48 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
                 <h2 className="font-bold text-lg mb-2">Results:</h2>
 
                 <div className="grid grid-cols-2 gap-2">
-                    <div className="font-medium">Scan Angle:</div>
-                    <div>{angle !== null ? angle.toFixed(2) + "°" : "N/A"}</div>
 
-                    <div className="font-medium">Distance:</div>
-                    <div>{distance !== null ? distance.toFixed(2) + " meters (or feet)" : "N/A"}</div>
+                    <div
+                        className="font-medium"
+                        style={{ fontWeight: calculationMode === CalculationMode.Width ? 'bold' : 'normal' }}
+                    >
+                        Projection Width:
+                    </div>
+                    <div
+                        className="font-medium"
+                        style={{ fontWeight: calculationMode === CalculationMode.Width ? 'bold' : 'normal' }}
+                    >
+                        {width !== null ? width.toFixed(2) + " meters (or feet)" : "N/A"}</div>
 
-                    <div className="font-medium">Projection Width:</div>
-                    <div>{width !== null ? width.toFixed(2) + " meters (or feet)" : "N/A"}</div>
+                    <div
+                        className="font-medium"
+                        style={{ fontWeight: calculationMode === CalculationMode.Distance ? 'bold' : 'normal' }}
+                    >
+                        Distance:
+                    </div>
+                    <div
+                        className="font-medium"
+                        style={{ fontWeight: calculationMode === CalculationMode.Distance ? 'bold' : 'normal' }}
+                    >
+                        {distance !== null ? distance.toFixed(2) + " meters (or feet)" : "N/A"}</div>
+
+                    <div
+                        className="font-medium"
+                        style={{ fontWeight: calculationMode === CalculationMode.Angle ? 'bold' : 'normal' }}
+                    >
+                        Scan Angle:
+                    </div>
+                    <div
+                        className="font-medium"
+                        style={{ fontWeight: calculationMode === CalculationMode.Angle ? 'bold' : 'normal' }}
+                    >
+                        {angle !== null ? angle.toFixed(2) + "°" : "N/A"}</div>
 
                     <div className="font-medium">Max Scan Rate:</div>
                     <div>{getRecommendedScanRateDisplay()}</div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
