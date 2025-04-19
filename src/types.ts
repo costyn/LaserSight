@@ -14,8 +14,11 @@ export interface ScannerDatabase {
     [key: string]: Scanner;
 }
 
-// Calculation modes
-export type CalculationMode = "width" | "distance" | "angle";
+export enum CalculationMode {
+    Width = "width",
+    Distance = "distance",
+    Angle = "angle"
+}
 
 // Scanner calculation functions
 export const calculateWidth = (angle: number, distance: number): number => {
