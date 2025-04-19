@@ -1,0 +1,97 @@
+{
+    "DT40": {
+        "name": "DT40",
+        "specs": [
+            {
+                "angle": 15,
+                "kpps": 30,
+                "note": "ILDA at 15°"
+            },
+            {
+                "angle": 8,
+                "kpps": 39,
+                "note": "ILDA at 8°"
+            },
+            {
+                "angle": 8,
+                "kpps": 37,
+                "note": "ILDA at 8° (For 5mm beam of mirror)"
+            },
+            {
+                "angle": 6,
+                "kpps": 50,
+                "note": "ILDA at 6°"
+            }
+        ]
+    },
+    "CT6215": {
+        "name": "CT-6215H",
+        "specs": [
+            {
+                "angle": 8,
+                "kpps": 60,
+                "note": "ILDA standard"
+            },
+            {
+                "angle": 4,
+                "kpps": 80,
+                "note": "ILDA at 4°"
+            }
+        ]
+    },
+    "CT6210": {
+        "name": "CT-6210H",
+        "specs": [
+            {
+                "angle": 8,
+                "kpps": 45,
+                "note": "ILDA standard"
+            },
+            {
+                "angle": 4,
+                "kpps": 60,
+                "note": "ILDA at 4°"
+            }
+        ]
+    },
+    "DT40PRO": {
+        "name": "DT40 PRO",
+        "specs": [
+            {
+                "angle": 8,
+                "kpps": 40,
+                "note": "ILDA standard"
+            },
+            {
+                "angle": 4,
+                "kpps": 55,
+                "note": "ILDA at 4°"
+            }
+        ]
+    },
+    "ScannerPro30K": {
+        "name": "Scanner Pro 30K",
+        "specs": [
+            {
+                "angle": 8,
+                "kpps": 30,
+                "note": "ILDA standard"
+            }
+        ]
+    },
+    "GalvoMax50K": {
+        "name": "GalvoMax 50K",
+        "specs": [
+            {
+                "angle": 8,
+                "kpps": 50,
+                "note": "ILDA standard"
+            },
+            {
+                "angle": 5,
+                "kpps": 65,
+                "note": "ILDA at 5°"
+            }
+        ]
+    }
+}
