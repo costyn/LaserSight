@@ -8,6 +8,7 @@ const __dirname = dirname(__filename)
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/lasersight/', // For Github pages
   plugins: [react()],
   resolve: {
     alias: {
