@@ -10,7 +10,7 @@ const MinusButton = ({ onClick, disabled }: NumberButtonProps) => (
     className="px-3 py-1 rounded bg-blue-500 text-white"
     aria-label="Decrease value"
   >
-    -
+    -1
   </button>
 );
 
@@ -20,7 +20,7 @@ const PlusButton = ({ onClick }: NumberButtonProps) => (
     className="px-3 py-1 rounded bg-blue-500 text-white"
     aria-label="Increase value"
   >
-    +
+    +1
   </button>
 );
 

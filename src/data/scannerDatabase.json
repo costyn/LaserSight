@@ -69,28 +69,13 @@
             }
         ]
     },
-    "ScannerPro30K": {
-        "name": "Scanner Pro 30K",
+    "EMS8000DIGI": {
+        "name": "EMS-8000 Digi",
         "specs": [
             {
                 "angle": 8,
-                "kpps": 30,
+                "kpps": 60,
                 "note": "ILDA standard"
-            }
-        ]
-    },
-    "GalvoMax50K": {
-        "name": "GalvoMax 50K",
-        "specs": [
-            {
-                "angle": 8,
-                "kpps": 50,
-                "note": "ILDA standard"
-            },
-            {
-                "angle": 5,
-                "kpps": 65,
-                "note": "ILDA at 5°"
             }
         ]
     }
