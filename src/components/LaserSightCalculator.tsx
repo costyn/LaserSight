@@ -5,7 +5,8 @@ import {
     calculateWidth,
     calculateDistance,
     calculateAngle,
-    getRecommendedScanRate
+    getRecommendedScanRate,
+    MAX_ANGLE
 } from '../types';
 
 import { MinusButton, PlusButton } from './NumberAdjustButton';
@@ -45,20 +46,30 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
     // Calculate result when inputs change
     useEffect(() => {
         if (calculationMode === CalculationMode.Width && angle !== null && distance !== null) {
+            // Store the exact calculated value for precision in further calculations
             setWidth(calculateValue());
         } else if (calculationMode === CalculationMode.Distance && angle !== null && width !== null) {
+            // Store the exact calculated value for precision in further calculations
             setDistance(calculateValue());
         } else if (calculationMode === CalculationMode.Angle && distance !== null && width !== null) {
+            // Store the exact calculated value for precision in further calculations
             setAngle(calculateValue());
         }
     }, [angle, distance, width, calculationMode]);
 
     type SetterFunction = React.Dispatch<React.SetStateAction<number | null>>;
 
-    const handleInputChange = (setter: SetterFunction) => (e: ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (setter: SetterFunction, isAngle: boolean = false) => (e: ChangeEvent<HTMLInputElement>) => {
         const value = parseFloat(e.target.value);
         if (!isNaN(value)) {
-            setter(value);
+            // Input sanitization - ensure positive values
+            const sanitizedValue = Math.max(0, value);
+            // Apply MAX_ANGLE limit for angle input
+            if (isAngle) {
+                setter(Math.min(sanitizedValue, MAX_ANGLE));
+            } else {
+                setter(sanitizedValue);
+            }
         } else {
             setter(null);
         }
@@ -119,9 +130,11 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
 
                         <input
                             type="number"
+                            min="0"
+                            max={MAX_ANGLE}
                             value={angle !== null
-                                ? Math.round(angle) : ""}
-                            onChange={handleInputChange(setAngle)}
+                                ? (angle === Math.round(angle) ? angle : Number(angle.toFixed(2))) : ""}
+                            onChange={handleInputChange(setAngle, true)}
                             className="w-full p-2 border rounded"
                             placeholder="Enter scan angle"
                         />
@@ -129,7 +142,10 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
                             onClick={() => setAngle(prev => Math.max((prev || 0) - 1, 0))}
                             disabled={!angle || angle <= 0}
                         />
-                        <PlusButton onClick={() => setAngle(prev => (prev || 0) + 1)} />
+                        <PlusButton 
+                            onClick={() => setAngle(prev => Math.min((prev || 0) + 1, MAX_ANGLE))} 
+                            disabled={angle !== null && angle >= MAX_ANGLE}
+                        />
                     </div>
                 </div>
 
@@ -141,14 +157,16 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
                     <div className="flex items-center space-x-4">
                         <input
                             type="number"
-                            value={distance || ""}
+                            min="0"
+                            value={distance !== null
+                                ? (distance === Math.round(distance) ? distance : Number(distance.toFixed(2))) : ""}
                             onChange={handleInputChange(setDistance)}
                             className="w-full p-2 border rounded"
                             placeholder="Enter distance"
                         />
                         <MinusButton
                             onClick={() => setDistance(prev => Math.max((prev || 0) - 1, 0))}
-                            disabled={!angle || angle <= 0}
+                            disabled={!distance || distance <= 0}
                         />
                         <PlusButton onClick={() => setDistance(prev => (prev || 0) + 1)} />
                     </div>
@@ -161,14 +179,16 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
                     <div className="flex items-center space-x-4">
                         <input
                             type="number"
-                            value={width || ""}
+                            min="0"
+                            value={width !== null
+                                ? (width === Math.round(width) ? width : Number(width.toFixed(2))) : ""}
                             onChange={handleInputChange(setWidth)}
                             className="w-full p-2 border rounded"
                             placeholder="Enter projection width"
                         />
                         <MinusButton
                             onClick={() => setWidth(prev => Math.max((prev || 0) - 1, 0))}
-                            disabled={!angle || angle <= 0}
+                            disabled={!width || width <= 0}
                         />
                         <PlusButton onClick={() => setWidth(prev => (prev || 0) + 1)} />
                     </div>
