@@ -6,9 +6,26 @@
   <link rel="icon" type="image/svg+xml" href="vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LaserSight</title>
+  <script>
+    // Avoid flash of wrong theme
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      
+      // Default to dark mode unless explicitly set to light
+      if (savedTheme === 'light') {
+        document.documentElement.classList.remove('dark');
+      } else {
+        // Set dark mode as default
+        document.documentElement.classList.add('dark');
+        if (!savedTheme) {
+          localStorage.setItem('theme', 'dark');
+        }
+      }
+    })();
+  </script>
 </head>
 
-<body>
+<body class="bg-white dark:bg-gray-900">
   <div id="root"></div>
   <script type="module" src="src/main.tsx"></script>
 </body>
