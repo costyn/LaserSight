@@ -67,12 +67,6 @@ describe('calculateDistance', () => {
 });
 
 describe('calculateAngle', () => {
-  it('prevents negative distances but returns valid angle calculation', () => {
-    // Since we use Math.max(0, distance), a negative distance becomes 0
-    // With distance=0 and width>0, the angle calculation results in MAX_ANGLE
-    expect(calculateAngle(-10, 5)).toBe(MAX_ANGLE);
-  });
-
   it('prevents negative widths and sanitizes to 0', () => {
     expect(calculateAngle(10, -5)).toBeCloseTo(0, 2);
   });

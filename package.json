@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npx tailwindcss -i ./src/index.css -o ./src/tailwind.css && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "gh-deploy": "npm run build && touch dist/.nojekyll && gh-pages -d dist",
+    "gh-deploy": "npm run build && touch dist/.nojekyll && npx gh-pages -d dist",
     "test": "vitest run"
   },
   "dependencies": {

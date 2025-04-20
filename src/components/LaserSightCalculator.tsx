@@ -84,31 +84,31 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
     };
 
     return (
-        <div className="p-6 max-w-lg mx-auto bg-white rounded-xl shadow-md">
-            <div className="relative top-4 right-4">
+        <div className="p-6 max-w-lg mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-md relative">
+            <div className="absolute top-4 right-4">
                 <ThemeToggle />
             </div>
 
-            <h1 className="text-2xl font-bold text-center mb-6 text-blue-600">LaserSight Calculator</h1>
+            <h1 className="text-2xl font-bold text-center mb-6 text-blue-600 dark:text-blue-400">LaserSight Calculator</h1>
 
             <div className="mb-4">
-                <label className="block text-sm font-medium mb-2">Calculate:</label>
+                <label className="block text-sm font-medium mb-2 dark:text-white">Calculate:</label>
                 <div className="flex space-x-4">
                     <button
                         onClick={() => handleModeChange(CalculationMode.Width)}
-                        className={`px-3 py-1 rounded ${calculationMode === CalculationMode.Width ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+                        className={`px-3 py-1 rounded ${calculationMode === CalculationMode.Width ? "bg-blue-500 text-white" : "bg-gray-200 dark:bg-gray-600 dark:text-gray-200"}`}
                     >
                         Width
                     </button>
                     <button
                         onClick={() => handleModeChange(CalculationMode.Distance)}
-                        className={`px-3 py-1 rounded ${calculationMode === CalculationMode.Distance ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+                        className={`px-3 py-1 rounded ${calculationMode === CalculationMode.Distance ? "bg-blue-500 text-white" : "bg-gray-200 dark:bg-gray-600 dark:text-gray-200"}`}
                     >
                         Distance
                     </button>
                     <button
                         onClick={() => handleModeChange(CalculationMode.Angle)}
-                        className={`px-3 py-1 rounded ${calculationMode === CalculationMode.Angle ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+                        className={`px-3 py-1 rounded ${calculationMode === CalculationMode.Angle ? "bg-blue-500 text-white" : "bg-gray-200 dark:bg-gray-600 dark:text-gray-200"}`}
                     >
                         Angle
                     </button>
@@ -116,11 +116,11 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
             </div>
 
             <div className="mb-4">
-                <label className="block text-sm font-medium mb-2">Scanner Type:</label>
+                <label className="block text-sm font-medium mb-2 dark:text-white">Scanner Type:</label>
                 <select
                     value={selectedScanner}
                     onChange={(e) => setSelectedScanner(e.target.value)}
-                    className="w-full p-2 border rounded"
+                    className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white dark:border-gray-600"
                 >
                     {Object.keys(scannerDatabase).map(scanner => (
                         <option key={scanner} value={scanner}>{scannerDatabase[scanner].name}</option>
@@ -130,7 +130,7 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
 
             {calculationMode !== CalculationMode.Angle && (
                 <div className="mb-4">
-                    <label className="block text-sm font-medium mb-2">Scan Angle (degrees):</label>
+                    <label className="block text-sm font-medium mb-2 dark:text-white">Scan Angle (degrees):</label>
                     <div className="flex items-center space-x-4">
 
                         <input
@@ -140,7 +140,7 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
                             value={angle !== null
                                 ? (angle === Math.round(angle) ? angle : Number(angle.toFixed(2))) : ""}
                             onChange={handleInputChange(setAngle, true)}
-                            className="w-full p-2 border rounded"
+                            className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white dark:border-gray-600"
                             placeholder="Enter scan angle"
                         />
                         <MinusButton
@@ -158,7 +158,7 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
 
             {calculationMode !== CalculationMode.Distance && (
                 <div className="mb-4">
-                    <label className="block text-sm font-medium mb-2">Distance (meters or feet):</label>
+                    <label className="block text-sm font-medium mb-2 dark:text-white">Distance (meters or feet):</label>
                     <div className="flex items-center space-x-4">
                         <input
                             type="number"
@@ -166,7 +166,7 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
                             value={distance !== null
                                 ? (distance === Math.round(distance) ? distance : Number(distance.toFixed(2))) : ""}
                             onChange={handleInputChange(setDistance)}
-                            className="w-full p-2 border rounded"
+                            className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white dark:border-gray-600"
                             placeholder="Enter distance"
                         />
                         <MinusButton
@@ -180,7 +180,7 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
 
             {calculationMode !== CalculationMode.Width && (
                 <div className="mb-4">
-                    <label className="block text-sm font-medium mb-2">Projection Width (meters or feet):</label>
+                    <label className="block text-sm font-medium mb-2 dark:text-white">Projection Width (meters or feet):</label>
                     <div className="flex items-center space-x-4">
                         <input
                             type="number"
@@ -188,7 +188,7 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
                             value={width !== null
                                 ? (width === Math.round(width) ? width : Number(width.toFixed(2))) : ""}
                             onChange={handleInputChange(setWidth)}
-                            className="w-full p-2 border rounded"
+                            className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white dark:border-gray-600"
                             placeholder="Enter projection width"
                         />
                         <MinusButton
@@ -200,49 +200,49 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
                 </div>
             )}
 
-            <div className="bg-gray-100 p-4 rounded-lg">
-                <h2 className="font-bold text-lg mb-2">Results:</h2>
+            <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
+                <h2 className="font-bold text-lg mb-2 dark:text-white">Results:</h2>
 
                 <div className="grid grid-cols-2 gap-2">
 
                     <div
-                        className="font-medium"
+                        className="font-medium dark:text-white"
                         style={{ fontWeight: calculationMode === CalculationMode.Width ? 'bold' : 'normal' }}
                     >
                         Projection Width:
                     </div>
                     <div
-                        className="font-medium"
+                        className="font-medium dark:text-white"
                         style={{ fontWeight: calculationMode === CalculationMode.Width ? 'bold' : 'normal' }}
                     >
                         {width !== null ? width.toFixed(2) + " meters (or feet)" : "N/A"}</div>
 
                     <div
-                        className="font-medium"
+                        className="font-medium dark:text-white"
                         style={{ fontWeight: calculationMode === CalculationMode.Distance ? 'bold' : 'normal' }}
                     >
                         Distance:
                     </div>
                     <div
-                        className="font-medium"
+                        className="font-medium dark:text-white"
                         style={{ fontWeight: calculationMode === CalculationMode.Distance ? 'bold' : 'normal' }}
                     >
                         {distance !== null ? distance.toFixed(2) + " meters (or feet)" : "N/A"}</div>
 
                     <div
-                        className="font-medium"
+                        className="font-medium dark:text-white"
                         style={{ fontWeight: calculationMode === CalculationMode.Angle ? 'bold' : 'normal' }}
                     >
                         Scan Angle:
                     </div>
                     <div
-                        className="font-medium"
+                        className="font-medium dark:text-white"
                         style={{ fontWeight: calculationMode === CalculationMode.Angle ? 'bold' : 'normal' }}
                     >
                         {angle !== null ? angle.toFixed(2) + "°" : "N/A"}</div>
 
-                    <div className="font-medium">Max Scan Rate:</div>
-                    <div>{getRecommendedScanRateDisplay()}</div>
+                    <div className="font-medium dark:text-white">Max Scan Rate:</div>
+                    <div className="dark:text-white">{getRecommendedScanRateDisplay()}</div>
                 </div>
             </div>
         </div >
