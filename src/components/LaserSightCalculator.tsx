@@ -6,6 +6,7 @@ import {
     calculateDistance,
     calculateAngle,
     getRecommendedScanRate,
+    exceedsMaxScannerAngle,
     MAX_ANGLE
 } from '../types';
 import { ThemeToggle } from './ThemeToggle.tsx';
@@ -130,9 +131,13 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
 
             {calculationMode !== CalculationMode.Angle && (
                 <div className="mb-4">
-                    <label className="block text-sm font-medium mb-2 dark:text-white">Scan Angle (degrees):</label>
+                    <label className="block text-sm font-medium mb-2 dark:text-white">
+                        Scan Angle (degrees):
+                        <span className="text-white-500 ml-2 font-normal">
+                            &nbsp;(max: {scannerDatabase[selectedScanner].maxAngle})
+                        </span>
+                    </label>
                     <div className="flex items-center space-x-4">
-
                         <input
                             type="number"
                             min="0"
@@ -140,18 +145,25 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
                             value={angle !== null
                                 ? (angle === Math.round(angle) ? angle : Number(angle.toFixed(2))) : ""}
                             onChange={handleInputChange(setAngle, true)}
-                            className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                            className={`w-full p-2 border rounded dark:bg-gray-700 dark:text-white dark:border-gray-600 
+                                ${angle !== null && scannerDatabase[selectedScanner] && exceedsMaxScannerAngle(scannerDatabase[selectedScanner], angle) ? 'border-red-500 text-red-500' : ''}`}
                             placeholder="Enter scan angle"
                         />
                         <MinusButton
                             onClick={() => setAngle(prev => Math.max((prev || 0) - 1, 0))}
                             disabled={!angle || angle <= 0}
                         />
-                        <PlusButton 
-                            onClick={() => setAngle(prev => Math.min((prev || 0) + 1, MAX_ANGLE))} 
+                        <PlusButton
+                            onClick={() => setAngle(prev => Math.min((prev || 0) + 1, MAX_ANGLE))}
                             disabled={angle !== null && angle >= MAX_ANGLE}
                         />
+
                     </div>
+                    {angle !== null && exceedsMaxScannerAngle(scannerDatabase[selectedScanner], angle) &&
+                        <span className="text-red-500 ml-2 font-normal dark:text-red-500">
+                            (Exceeds max {scannerDatabase[selectedScanner]?.maxAngle}°)
+                        </span>
+                    }
                 </div>
 
             )}
@@ -239,10 +251,20 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
                         className="font-medium dark:text-white"
                         style={{ fontWeight: calculationMode === CalculationMode.Angle ? 'bold' : 'normal' }}
                     >
-                        {angle !== null ? angle.toFixed(2) + "°" : "N/A"}</div>
+                        {angle !== null ? angle.toFixed(2) + "°" : "N/A"}
+                        {angle !== null && exceedsMaxScannerAngle(scannerDatabase[selectedScanner], angle) &&
+                            <span className="text-red-500 ml-2">(Exceeds max {scannerDatabase[selectedScanner]?.maxAngle}°)</span>
+                        }
+                    </div>
 
                     <div className="font-medium dark:text-white">Max Scan Rate:</div>
                     <div className="dark:text-white">{getRecommendedScanRateDisplay()}</div>
+
+                    <div className="font-medium dark:text-white">Scanner Limits:</div>
+                    <div className="dark:text-white">
+                        Max Angle: {scannerDatabase[selectedScanner]?.maxAngle ? scannerDatabase[selectedScanner].maxAngle + "°" : "Unknown"}<br />
+                        Max KPPS: {scannerDatabase[selectedScanner]?.maxKpps ? scannerDatabase[selectedScanner].maxKpps + "K" : "Unknown"}
+                    </div>
                 </div>
             </div>
         </div >

@@ -48,5 +48,4 @@ npm run dev
 - User-uploadable scanner specifications
 - Visual diagram of projection setup
 - Save favorite configurations
-- Unit conversion support (meters/feet)
-- Dark mode support
+- DONE: Dark mode support

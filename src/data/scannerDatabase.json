@@ -22,37 +22,9 @@
                 "kpps": 50,
                 "note": "ILDA at 6°"
             }
-        ]
-    },
-    "CT6215": {
-        "name": "CT-6215H",
-        "specs": [
-            {
-                "angle": 8,
-                "kpps": 60,
-                "note": "ILDA standard"
-            },
-            {
-                "angle": 4,
-                "kpps": 80,
-                "note": "ILDA at 4°"
-            }
-        ]
-    },
-    "CT6210": {
-        "name": "CT-6210H",
-        "specs": [
-            {
-                "angle": 8,
-                "kpps": 45,
-                "note": "ILDA standard"
-            },
-            {
-                "angle": 4,
-                "kpps": 60,
-                "note": "ILDA at 4°"
-            }
-        ]
+        ],
+        "maxAngle": 60,
+        "maxKpps": 50
     },
     "DT40PRO": {
         "name": "DT40 PRO",
@@ -67,7 +39,43 @@
                 "kpps": 55,
                 "note": "ILDA at 4°"
             }
-        ]
+        ],
+        "maxAngle": 60,
+        "maxKpps": 55
+    },
+    "CT6215": {
+        "name": "CT-6215H",
+        "specs": [
+            {
+                "angle": 8,
+                "kpps": 60,
+                "note": "ILDA standard"
+            },
+            {
+                "angle": 4,
+                "kpps": 80,
+                "note": "ILDA at 4°"
+            }
+        ],
+        "maxAngle": 60,
+        "maxKpps": 80
+    },
+    "CT6210": {
+        "name": "CT-6210H",
+        "specs": [
+            {
+                "angle": 8,
+                "kpps": 45,
+                "note": "ILDA standard"
+            },
+            {
+                "angle": 4,
+                "kpps": 60,
+                "note": "ILDA at 4°"
+            }
+        ],
+        "maxAngle": 60,
+        "maxKpps": 60
     },
     "EMS8000DIGI": {
         "name": "EMS-8000 Digi",
@@ -77,6 +85,8 @@
                 "kpps": 60,
                 "note": "ILDA standard"
             }
-        ]
+        ],
+        "maxAngle": 54,
+        "maxKpps": 60
     }
 }

@@ -13,6 +13,9 @@ All notable changes to the LaserSight Calculator will be documented in this file
 - Dark mode support with dark theme set as default
 - Theme toggle in the upper right corner of the calculator
 - Theme persistence using localStorage
+- Advanced KPPS interpolation between scanner angle specifications
+- Improved physics-based calculation model for scanner capabilities
+- Extrapolation for angles outside the scanner's specification range
 
 ### Fixed
 - Disabled minus buttons properly when values reach zero
@@ -25,3 +28,5 @@ All notable changes to the LaserSight Calculator will be documented in this file
 - Ensured all calculation functions handle edge cases correctly
 - Better user experience with rounded display values while maintaining calculation precision
 - Enhanced UI with proper dark mode styling for all elements
+- More accurate scanner performance estimation with inverse square relationship model
+- Better predictions of maximum scan rates for any given angle
