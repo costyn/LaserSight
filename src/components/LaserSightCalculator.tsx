@@ -134,7 +134,7 @@ const LaserSightCalculator = ({ scannerDatabase }: LaserSightCalculatorProps) =>
                     <label className="block text-sm font-medium mb-2 dark:text-white">
                         Scan Angle (degrees):
                         <span className="text-white-500 ml-2 font-normal">
-                            &nbsp;(max: {scannerDatabase[selectedScanner].maxAngle})
+                            &nbsp;(max: {scannerDatabase[selectedScanner]?.maxAngle})
                         </span>
                     </label>
                     <div className="flex items-center space-x-4">
